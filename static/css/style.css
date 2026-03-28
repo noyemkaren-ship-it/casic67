@@ -36,11 +36,26 @@ h1 {
     animation: fadeInDown 0.8s ease;
 }
 
+h2 {
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgb(255, 255, 255);
+    animation: fadeInDown 0.8s ease;
+}
+
 /* Параграфы */
 p {
     text-align: center;
     font-size: 24px;
     margin: 10px 0;
+}
+
+.p {
+    text-align: center;
+    font-size: 24px;
+    margin: 10px 0;
+    text-shadow: 2px 2px 4px rgb(255, 255, 255);
 }
 
 /* Баланс */
