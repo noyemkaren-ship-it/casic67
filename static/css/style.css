@@ -12,6 +12,21 @@
     color: white;
 }
 
+.RLBody {
+    background-image: url(../back.jpg);
+}
+
+
+.ErrorBody {
+    background-image: url(../backe.jpg);
+    background-size: cover;     
+    background-position: center; 
+    background-repeat: no-repeat; 
+    min-height: 100vh;           
+    margin: 0;                
+    padding: 0;                
+}
+
 /* Заголовок */
 h1 {
     text-align: center;
