@@ -7,15 +7,14 @@ from urllib.parse import quote, unquote
 router = APIRouter()
 user_repo = UserRepository()
 
-@router.get("/users")
+@router.get("/users", tags=["Login/Register"])
 async def get_users_endpoint():
     return get_all_users()
 
-@router.post("/register")
+@router.post("/register", tags=["Login/Register"])
 async def register_user(user: User, response: Response):
     result = reg(name=user.name, password=user.password)
     if result and not isinstance(result, dict):
-        # Кодируем имя для cookie (поддержка русских букв)
         encoded_name = quote(user.name)
         response.set_cookie(
             key="user", 
@@ -27,7 +26,7 @@ async def register_user(user: User, response: Response):
         return {"message": "Registration successful", "user": result}
     return result
 
-@router.post("/login")
+@router.post("/login", tags=["Login/Register"])
 async def login_user(user: User, response: Response):
     if user_repo.login(user.name, user.password):
         # Кодируем имя для cookie (поддержка русских букв)
@@ -42,7 +41,7 @@ async def login_user(user: User, response: Response):
         return {"message": "Login successful"}
     return {"message": "Invalid credentials"}
 
-@router.get("/first_game_slot")
+@router.get("/first_game_slot", tags=["Game"])
 async def first_game_slot_endpoint(request: Request, bet: int = 100):
     username_encoded = request.cookies.get("user")
     
@@ -62,14 +61,14 @@ async def first_game_slot_endpoint(request: Request, bet: int = 100):
     
     return result
 
-@router.get("/user/{name}/balance")
+@router.get("/user/{name}/balance", tags=["Get user balnce"])
 async def get_balance(name: str):
     balance = get_user_balance(name)
     if balance is None:
         raise HTTPException(status_code=404, detail="User not found")
     return {"name": name, "balance": balance}
 
-@router.patch("/user/balance")
+@router.patch("/user/balance", tags=["Patch user balance"])
 async def update_balance(user: UserPatch):
     user_repo.patch_balance_user(user.name, user.balance)
     return {"message": "Balance updated successfully"}

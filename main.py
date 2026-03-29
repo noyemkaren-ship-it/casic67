@@ -44,3 +44,7 @@ async def login(request: Request):
 @app.get("/register/page", tags=["page"])
 async def register(request: Request):
     return templates.TemplateResponse("register.html", {"request": request})
+
+@app.get("/info", tags=["page"])
+async def info(request: Request):
+    return templates.TemplateResponse("info.html", {"request": request})
