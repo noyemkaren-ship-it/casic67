@@ -48,6 +48,15 @@ p {
     text-align: center;
     font-size: 24px;
     margin: 10px 0;
+    animation: fadeInDown 0.8s ease;
+}
+
+a {
+    font-size: 24px;
+    margin: 10px 0;
+    text-shadow: #667eea;
+    animation: fadeInDown 0.8s ease;
+    text-align: center;
 }
 
 .pp {
