@@ -18,7 +18,6 @@ def get_user_by_name(name: str):
     return user_repo.get_by_name(name)
 
 def first_game_slot(name: str, bet: int = 100):
-    """Игровая логика"""
     user = user_repo.get_by_name(name)
     if not user:
         return {"error": "User not found"}
@@ -28,7 +27,7 @@ def first_game_slot(name: str, bet: int = 100):
     
     slot = random.randint(1, 10)
     
-    if slot == 1:  # Джекпот
+    if slot == 1: 
         win_amount = bet * 5
         new_balance = user.balance + win_amount
         user_repo.patch_balance_user(name, new_balance)
@@ -40,7 +39,7 @@ def first_game_slot(name: str, bet: int = 100):
             "balance_change": win_amount,
             "new_balance": new_balance
         }
-    elif slot <= 4:  # Выигрыш
+    elif slot <= 4:
         win_amount = bet * 2
         new_balance = user.balance + win_amount
         user_repo.patch_balance_user(name, new_balance)
@@ -52,7 +51,7 @@ def first_game_slot(name: str, bet: int = 100):
             "balance_change": win_amount,
             "new_balance": new_balance
         }
-    elif slot <= 6:  # Возврат
+    elif slot <= 6: 
         return {
             "message": "It's a draw! Bet returned",
             "result": "draw",
@@ -60,7 +59,7 @@ def first_game_slot(name: str, bet: int = 100):
             "balance_change": 0,
             "new_balance": user.balance
         }
-    else:  # Проигрыш
+    else:  
         new_balance = user.balance - bet
         user_repo.patch_balance_user(name, new_balance)
         return {

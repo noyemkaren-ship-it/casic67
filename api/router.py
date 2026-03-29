@@ -3,6 +3,7 @@ from api.services import get_all_users, reg, first_game_slot, get_user_balance
 from schemas.user import User, UserPatch
 from database.UserRepository import UserRepository
 from urllib.parse import quote, unquote
+from schemas.returns import Message, Error
 
 router = APIRouter()
 user_repo = UserRepository()
@@ -29,7 +30,6 @@ async def register_user(user: User, response: Response):
 @router.post("/login", tags=["Login/Register"])
 async def login_user(user: User, response: Response):
     if user_repo.login(user.name, user.password):
-        # Кодируем имя для cookie (поддержка русских букв)
         encoded_name = quote(user.name)
         response.set_cookie(
             key="user", 
@@ -38,8 +38,14 @@ async def login_user(user: User, response: Response):
             max_age=3600,
             path="/"
         )
-        return {"message": "Login successful"}
-    return {"message": "Invalid credentials"}
+        return Message(
+            name="Login",
+            text="Login is successfully"
+            )
+    return Message(
+        name="Login",
+        text="Invalid credentials"
+    )
 
 @router.get("/first_game_slot", tags=["Game"])
 async def first_game_slot_endpoint(request: Request, bet: int = 100):
@@ -71,4 +77,7 @@ async def get_balance(name: str):
 @router.patch("/user/balance", tags=["Patch user balance"])
 async def update_balance(user: UserPatch):
     user_repo.patch_balance_user(user.name, user.balance)
-    return {"message": "Balance updated successfully"}
+    return Message(
+        name="User balance", 
+        text="User balance updated successfully"
+    )
