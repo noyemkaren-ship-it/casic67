@@ -3,7 +3,7 @@ from api.services import get_all_users, reg, first_game_slot, get_user_balance
 from schemas.user import User, UserPatch
 from database.UserRepository import UserRepository
 from urllib.parse import quote, unquote
-from schemas.returns import Message, Error
+from schemas.returns import Message
 
 router = APIRouter()
 user_repo = UserRepository()
