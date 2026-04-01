@@ -42,7 +42,7 @@ async def login_user(user: User, response: Response):
             name="Login",
             text="Login is successfully"
             )
-    return HTTPException(status_code=401, detail="Invalid credentials")
+    raise HTTPException(status_code=401, detail="Invalid credentials")
 
 @router.get("/first_game_slot", tags=["Game"])
 async def first_game_slot_endpoint(request: Request, bet: int = 100):
