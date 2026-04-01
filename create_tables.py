@@ -1,9 +1,8 @@
 from sqlalchemy import create_engine
 from database.db import Base, engine
-from models.user import User  # Импортируем модель User
+from models.user import User
 
 def init_db():
-    """Создает все таблицы в базе данных"""
     Base.metadata.create_all(bind=engine)
     print("✅ Database initialized successfully!")
 

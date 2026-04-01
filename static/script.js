@@ -1,4 +1,4 @@
-// Получаем имя пользователя из cookie
+
 function getCookie(name) {
     let cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
@@ -10,7 +10,6 @@ function getCookie(name) {
     return null;
 }
 
-// Функция игры
 async function Spin() {
     const username = getCookie('user');
     
@@ -50,7 +49,6 @@ async function Spin() {
                 alert(`💎💎💎 ДЖЕКПОТ! +${result.balance_change} монет! 💎💎💎`);
             }
             
-            // Обновляем баланс
             if (result.new_balance !== undefined) {
                 document.getElementById('balance').textContent = result.new_balance;
             } else {
@@ -68,7 +66,6 @@ async function Spin() {
     }
 }
 
-// Функция обновления баланса
 async function updateBalance() {
     const username = getCookie('user');
     
@@ -86,7 +83,6 @@ async function updateBalance() {
     }
 }
 
-// Загружаем баланс при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
     updateBalance();
     
@@ -121,7 +117,6 @@ document.getElementById('registerForm')?.addEventListener('submit', async (e) =>
     }
 });
 
-// Логин
 document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     

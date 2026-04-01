@@ -34,18 +34,10 @@ class UserRepository:
         result = self.db.query(User).filter(User.name == name).first()
         return result
     
-    def get_by_password(self, password: str):
-        result = self.db.query(User).filter(User.password == password).first()
-        return result
-    
     
     def login(self, name: str, password: str):
-        name_user = self.get_by_name(name)
-        password_user = self.get_by_password(password)
-        if name_user and password_user:
-            return True
-        else:
-            return False
+        result = self.db.query(User).where(User.name == name, User.password == password).first()
+        return result is not None
 
     def close(self):
         self.db.close()
